@@ -1,0 +1,235 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Hasil Pemesanan Barang</title>
+
+    <style>
+        body {
+            font: 14px Arial;
+            background: #f4f4f4;
+        }
+
+        .container {
+            max-width: 780px;
+            margin: 25px auto;
+            padding: 25px;
+            background: white;
+            border: 1px solid #aaa;
+        }
+
+        nav {
+            text-align: center;
+            border: 1px solid;
+            padding: 10px;
+            margin-bottom: 25px;
+        }
+
+        nav a {
+            color: #222;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        .content {
+            display: flex;
+            gap: 25px;
+        }
+
+        .photo {
+            width: 180px;
+            height: 170px;
+            flex-shrink: 0;
+            border: 1px solid;
+            position: relative;
+            background: white;
+        }
+
+        .photo::before,
+        .photo::after {
+            content: '';
+            position: absolute;
+            top: 84px;
+            left: -34px;
+            width: 238px;
+            border-top: 1px solid black;
+            transform: rotate(45deg);
+        }
+
+        .photo::after {
+            transform: rotate(-45deg);
+        }
+
+        .field {
+            display: flex;
+            margin-bottom: 12px;
+            white-space: pre-wrap;
+        }
+
+        .field strong {
+            width: 145px;
+            flex-shrink: 0;
+            font-weight: normal;
+        }
+
+        .checks {
+            color: green;
+            font-size: 12px;
+            margin-left: 145px;
+        }
+
+        .button {
+            text-align: center;
+            margin: 30px;
+        }
+
+        button {
+            background: green;
+            color: white;
+            padding: 10px 18px;
+            border: 0;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            .content {
+                flex-direction: column;
+            }
+
+            .field strong {
+                width: 115px;
+            }
+
+            .checks {
+                margin-left: 115px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <nav>
+            <a href="prak2_kelompok_1_desainuiux_pemweb.html">
+                Home
+            </a>
+            |
+            <a href="#">Register</a>
+            |
+            <a href="#">Policy</a>
+            |
+            <a href="#">About</a>
+        </nav>
+
+        <div class="content">
+
+            <!-- Foto Barang -->
+            <div class="photo" aria-label="Foto barang"></div>
+
+            <!-- Detail Pemesanan -->
+            <div>
+
+                <div class="field">
+                    <strong>Title Here :</strong>
+                    <span id="title"></span>
+                </div>
+
+                <div class="field">
+                    <strong>Description :</strong>
+                    <span id="description"></span>
+                </div>
+
+                <div class="field">
+                    <strong>Total Amount :</strong>
+                    <span>E800</span>
+                </div>
+
+                <div class="field">
+                    <strong>Pay to :</strong>
+                    <span id="payto"></span>
+                </div>
+
+                <div class="field">
+                    <strong>Payment Type :</strong>
+                    <span>Visa Debit</span>
+                </div>
+
+                <div class="field">
+                    <strong>Account Holder :</strong>
+                    <span id="holder"></span>
+                </div>
+
+                <div class="field">
+                    <strong>Account No :</strong>
+                    <span id="account"></span>
+                </div>
+
+                <!-- Konfirmasi Pengiriman -->
+                <div class="checks">
+                    <div id="mobilecheck"></div>
+                    <div id="emailcheck"></div>
+                </div>
+
+                <div class="field">
+                    <strong>Send to Mobile Phone :</strong>
+                    <span id="phone"></span>
+                </div>
+
+                <div class="field">
+                    <strong>Send to Email :</strong>
+                    <span id="email"></span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Tombol Pembayaran -->
+        <div class="button">
+            <button onclick="location.href='prak2_kelompok_1_desainuiux_pemweb.html'">
+                Pay using Quid.id
+            </button>
+        </div>
+
+    </main>
+
+    <script>
+        const p = new URLSearchParams(location.search);
+
+        // Mengambil data dari URL
+        for (const k of [
+            'title',
+            'description',
+            'holder',
+            'account',
+            'phone',
+            'email'
+        ]) {
+            document.getElementById(k).textContent =
+                p.get(k) || '-';
+        }
+
+        // Menampilkan tujuan pembayaran
+        document.getElementById('payto').textContent =
+            p.get('account') || '-';
+
+        // Status konfirmasi
+        document.getElementById('mobilecheck').textContent =
+            p.has('mobile')
+                ? '☑ Send to Mobile Phone'
+                : '☐ Send to Mobile Phone';
+
+        document.getElementById('emailcheck').textContent =
+            p.has('emailcheck')
+                ? '☑ Email me copy of transaction'
+                : '☐ Email me copy of transaction';
+    </script>
+
+</body>
+</html>
+```

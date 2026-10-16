@@ -1,0 +1,333 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Form Pemesanan Barang</title>
+
+    <style>
+        body {
+            font: 14px Arial;
+            background: #f4f4f4;
+        }
+
+        .container {
+            max-width: 780px;
+            margin: 25px auto;
+            padding: 25px;
+            background: white;
+            border: 1px solid #aaa;
+        }
+
+        nav {
+            text-align: center;
+            border: 1px solid;
+            padding: 10px;
+            margin-bottom: 25px;
+        }
+
+        nav a {
+            color: #222;
+            margin: 0 12px;
+            text-decoration: none;
+        }
+
+        .content {
+            display: flex;
+            gap: 25px;
+        }
+
+        .photo {
+            width: 180px;
+            flex-shrink: 0;
+        }
+
+        .photo img {
+            width: 170px;
+            height: 170px;
+            object-fit: cover;
+            border: 1px solid;
+        }
+
+        .photo input {
+            width: 170px;
+        }
+
+        .form {
+            flex: 1;
+        }
+
+        .field {
+            display: flex;
+            align-items: start;
+            margin-bottom: 12px;
+        }
+
+        .field label {
+            width: 145px;
+            flex-shrink: 0;
+        }
+
+        .field input,
+        .field textarea,
+        .field select {
+            max-width: 100%;
+            width: 280px;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+        .checks {
+            margin-left: 145px;
+            color: green;
+            font-size: 12px;
+        }
+
+        .checks label {
+            display: block;
+        }
+
+        .hint {
+            margin-left: 145px;
+            font-size: 11px;
+        }
+
+        .submit {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        button {
+            background: green;
+            color: white;
+            border: 0;
+            padding: 10px 18px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            .content {
+                flex-direction: column;
+            }
+
+            .field label {
+                width: 115px;
+            }
+
+            .checks,
+            .hint {
+                margin-left: 115px;
+            }
+
+            nav a {
+                margin: 0 3px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <!-- Navigasi -->
+        <nav>
+            <a href="#">Home</a> |
+            <a href="#">Generate Link</a> |
+            <a href="#">Transaction History</a> |
+            <a href="#">Policy</a> |
+            <a href="#">Logout</a>
+        </nav>
+
+        <!-- Form Pemesanan -->
+        <form action="hasil.html" method="GET">
+
+            <div class="content">
+
+                <!-- Upload dan Preview Foto -->
+                <div class="photo">
+
+                    <img
+                        id="preview"
+                        alt="Preview barang"
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='170' height='170'%3E%3Crect width='170' height='170' fill='white' stroke='black'/%3E%3Cpath d='M0 0L170 170M170 0L0 170' stroke='black'/%3E%3C/svg%3E"
+                    >
+
+                    <input
+                        type="file"
+                        accept="image/*"
+                        aria-label="Upload picture"
+                        onchange="
+                            const f = this.files[0];
+
+                            if (f) {
+                                const r = new FileReader();
+
+                                r.onload = () => {
+                                    document.getElementById('preview').src = r.result;
+                                };
+
+                                r.readAsDataURL(f);
+                            }
+                        "
+                    >
+
+                </div>
+
+                <!-- Input Detail Barang -->
+                <div class="form">
+
+                    <div class="field">
+                        <label for="title">
+                            Title Here :
+                        </label>
+
+                        <input
+                            id="title"
+                            name="title"
+                            value="MacBook Air E800"
+                            required
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="description">
+                            Description :
+                        </label>
+
+                        <textarea
+                            id="description"
+                            name="description"
+                            rows="5"
+                        >Year : 2009
+Model :
+Condition : Mint</textarea>
+                    </div>
+
+                    <div class="field">
+                        <label for="account">
+                            Account Number :
+                        </label>
+
+                        <input
+                            id="account"
+                            name="account"
+                            value="123-456-789-0"
+                            required
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="bank">
+                            Bank :
+                        </label>
+
+                        <select id="bank" name="bank">
+                            <option>BCA</option>
+                            <option>BRI</option>
+                            <option>BNI</option>
+                            <option>Mandiri</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="holder">
+                            Account Holder :
+                        </label>
+
+                        <input
+                            id="holder"
+                            name="holder"
+                            placeholder="Name Here"
+                            required
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="transaction">
+                            Transaction :
+                        </label>
+
+                        <select id="transaction" name="transaction">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
+                    </div>
+
+                    <!-- Petunjuk Transaksi -->
+                    <div class="hint">
+                        * If the transaction is for 3 person,
+                        choose 3 from the drop-down list.
+                    </div>
+
+                    <!-- Pilihan Notifikasi -->
+                    <div class="checks">
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="mobile"
+                                value="yes"
+                                checked
+                            >
+                            Send to Mobile Phone
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="emailcheck"
+                                value="yes"
+                                checked
+                            >
+                            Send to Email
+                        </label>
+
+                    </div>
+
+                    <div class="field">
+                        <label for="phone">
+                            Send to Mobile Phone :
+                        </label>
+
+                        <input
+                            id="phone"
+                            name="phone"
+                            value="1234567890, 1234567891"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="email">
+                            Send to Email :
+                        </label>
+
+                        <input
+                            id="email"
+                            name="email"
+                            value="mhs@mail.com, contoh@mail.com"
+                        >
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Tombol Submit -->
+            <div class="submit">
+                <button type="submit">
+                    Generate Order Link
+                </button>
+            </div>
+
+        </form>
+
+    </main>
+
+</body>
+</html>
+```
